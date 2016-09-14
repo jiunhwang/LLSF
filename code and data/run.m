@@ -95,8 +95,8 @@ else
         end
         
        %% If we don't search the parameters, we will run LLSF with the fixed parametrs
-        [model_LLSF]  = LLSF( cv_train_data, cv_train_target',optmParameter);
-        Outputs       = cv_test_data*model_LLSF;
+        [W]  = LLSF( cv_train_data, cv_train_target',optmParameter);
+        Outputs       = cv_test_data*W;
 
        %% In our experiment, we set the threshold to be 0.5, and an appropriate threshold can be searched on the training data, and
        %% a better performance would be achieved.
@@ -109,7 +109,7 @@ else
 
        %% count the number of label specific features for each label
         if modelparameter.drawNumofFeatures
-            numofFeatures = sum(model_LLSF~=0);
+            numofFeatures = sum(W~=0);
             figure;
             bar(numofFeatures);
         end
@@ -123,8 +123,15 @@ else
     PrintResults(Avg_Result);
 
 end
-endtime = datestr(now,0);
 
+endtime = datestr(now,0);
+model_LLSF.optmParameter = optmParameter;
+model_LLSF.modelparameter = modelparameter;
+model_LLSF.randorder = randorder;
+model_LLSF.cvResults = Result_LLSF;
+model_LLSF.avgResult = Avg_Result;
+model_LLSF.startTime = starttime;
+model_LLSF.endTime = endtime;
 
 
 
