@@ -116,7 +116,7 @@ else
     end
 
    %% the average results of LLSF
-    Avg_Result = zeros(15,6);
+    Avg_Result = zeros(15,2);
     Avg_Result(:,1)=mean(Result_LLSF,2);
     Avg_Result(:,2)=std(Result_LLSF,1,2);
     fprintf('\nResults of LLSF\n');
